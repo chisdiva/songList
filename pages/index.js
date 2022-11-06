@@ -4,14 +4,17 @@ import styles from '../styles/Home.module.scss'
 import { Layout, Table } from 'antd';
 
 import SongListTable from '../components/SongListTable';
+import Introduction from '../components/Introduction';
 import { useEffect } from 'react';
+
+import musicList from '../public/oakSongList.json'
 
 const { Header, Footer, Content } = Layout;
 export default function Home() {
-  let height = '';
+
+  // 解决移动端输入法弹起导致背景被顶起问题
   useEffect(() => {
     const innerHeight = document.documentElement.clientHeight;
-    console.log(document.getElementById('main'));
     document.getElementById('main').style.height = innerHeight + 'px';
     
   }, [])
@@ -24,7 +27,8 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-      <SongListTable />
+        <Introduction />
+      <SongListTable musicList={musicList}/>
         
       </main>
 

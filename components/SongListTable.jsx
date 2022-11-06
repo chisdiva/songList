@@ -1,28 +1,29 @@
-import { Input, Table } from "antd"
+import { Input, message, Table, ConfigProvider } from "antd"
 import styles from '../styles/Home.module.scss'
 import Image from 'next/image'
 
-import musicList from '../public/oakSongList.json'
 
-import {useEffect, useState} from 'react'
+import {useCallback} from 'react'
+import useTableSource from "../hooks/useTableSource"
+import copy from "copy-to-clipboard"
 
 const SongListTable = (props) => {
     // 搜索字符串
     // const [searchStr, setSearchStr] = useState('');
-    const [filterMusicList, setFilterMusicList] = useState(musicList);
-    // useEffect(() => {
-            
-    // }, [searchStr])
+    const {musicList} = props;
+    
+    const {
+        onInputChange,
+        filterMusicList,
+    } = useTableSource({musicList})
 
-    const onInputChange = (e) => {
-        const searchStr = e.target.value;
-        if(!searchStr) {
-            setFilterMusicList(musicList);
-        }
-        setFilterMusicList(musicList.filter((item) => {
-            return Object.values(item).toString().toLowerCase().includes(searchStr.toLowerCase())
-        }))
-    }
+    const handleRowClick = useCallback((record) => {
+        if(record.song_name) {
+            copy(`点歌 ${record.song_name}`);
+            message.success(`《${record.song_name}》已复制到剪贴板`)
+        };
+    }, [])
+
     const columns = [
         {
             title: '歌名',
@@ -64,18 +65,27 @@ const SongListTable = (props) => {
 
     ]
 
+    const emptyTable = () => {
+        return (
+            <p style={{color: "black", fontSize: '30px', fontWeight: '400'}}>歌单里暂无你要的歌哦~</p>
+        )
+    };
+
     return (
         <div 
             className={styles.songListTable}
         >
             <Input size="large" style={{marginBottom: '20px'}} placeholder="搜索" onChange={onInputChange}/>
+            <ConfigProvider renderEmpty={emptyTable}>
             <Table 
                 columns={columns}
                 dataSource={filterMusicList}
                 pagination={false}
                 tableLayout="fixed"
-                scroll={{x: 400}}
+                scroll={{x: 450}}
+                onRow={(record) => {return {onClick: () => handleRowClick(record)}}}
             />
+            </ConfigProvider>
         </div>
     )
 }
