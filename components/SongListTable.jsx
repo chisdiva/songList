@@ -29,6 +29,18 @@ const SongListTable = (props) => {
             title: '歌名',
             dataIndex: 'song_name',
             key: 'song_name',
+            render (text, record) {
+                const {videoUrl} = record;
+                return (
+                    <>
+                    {videoUrl && 
+                        <a href={`https://www.bilibili.com/video/${videoUrl}`} target="blank" onClick={(e) => {e.stopPropagation()}}>
+                        <Image src="/images/bili.ico" alt="去听听" width={20} height={20}/>
+                    </a>}
+                    <span style={{marginLeft: '5px'}}>{text}</span>
+                    </>
+                )
+            }
         },
         {
             title: '歌手',
@@ -46,22 +58,6 @@ const SongListTable = (props) => {
             dataIndex: 'desc',
             key: 'desc',
         },
-        {
-            title: '歌切/投稿',
-            dataIndex: 'videoUrl',
-            key: 'videoUrl',
-            align: 'center',
-            width: '10vw',
-            render(text) {
-                return (
-                    text && (
-                        <a href={`https://www.bilibili.com/video/${text}`} target="blank" style={{textAlign: 'center'}}>
-                        <Image src="/images/bili.ico" alt="去听听" width={20} height={20}/>
-                    </a>
-                    )              
-                )
-            }
-        }
 
     ]
 

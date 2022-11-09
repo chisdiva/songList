@@ -58,6 +58,16 @@
   }
 }
 
+.header {
+  margin-bottom: 20px;
+  :global {
+    .ant-card {
+      border-radius: 20px;
+      background-color: rgba(255, 255, 255, 0.6);
+    }
+  }
+}
+
 .footer {
   display: flex;
   flex: 1;
@@ -88,7 +98,8 @@
 .title {
   margin: 0;
   line-height: 1.15;
-  font-size: 4rem;
+  font-size: 2rem;
+  color: rgb(80, 98, 90);
 }
 
 .title,
