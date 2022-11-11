@@ -14,9 +14,9 @@ const SongListTable = (props) => {
   const { onInputChange, filterMusicList } = useTableSource({ musicList });
 
   const handleRowClick = useCallback((record) => {
-    if (record.song_name) {
-      copy(`点歌 ${record.song_name}`);
-      message.success(`《${record.song_name}》已复制到剪贴板，去点歌吧~`);
+    if (record.songName) {
+      copy(`点歌 ${record.songName}`);
+      message.success(`《${record.songName}》已复制到剪贴板，去点歌吧~`);
     }
   }, []);
 
