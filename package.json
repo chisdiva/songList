@@ -11,8 +11,6 @@
   "dependencies": {
     "antd": "^4.24.1",
     "copy-to-clipboard": "^3.3.2",
-    "eslint": "8.26.0",
-    "eslint-config-next": "13.0.2",
     "next": "^11.0.0",
     "react": "17.0.2",
     "react-countup": "^6.3.2",
@@ -20,6 +18,8 @@
     "sass": "^1.56.0"
   },
   "devDependencies": {
-    "prettier": "^2.5.1"
+    "prettier": "^2.5.1",
+    "eslint": "7.32.0",
+    "eslint-config-next": "11.0.0"
   }
 }
