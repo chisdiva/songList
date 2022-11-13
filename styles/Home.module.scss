@@ -6,7 +6,7 @@
   padding: 0 1vw;
   width: 100%;
   overflow: auto;
-  background: url("/images/osk2.webp") center center no-repeat;
+  background: url("/images/oak2.webp") center center no-repeat;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -25,7 +25,7 @@
 .songListTable {
   :global {
     .ant-table {
-      background-color: rgba(255, 255, 255, 0.3);
+      background-color: rgba(255, 255, 255, 0.1);
       border-radius: 20px;
       border: solid 2px #dfdfdf;
       overflow: hidden;
@@ -34,7 +34,7 @@
       border-radius: 20px;
       border: solid 2px #dfdfdf;
       overflow: hidden;
-      background-color: rgba(255, 255, 255, 0.6);
+      background-color: rgba(255, 255, 255, 0.4);
     }
     .ant-input:focus,
     .ant-input:hover {
@@ -45,12 +45,12 @@
     //   width: 100%;
     // }
     .ant-table-thead > tr > th {
-      background-color: rgba(255, 255, 255, 0.3);
+      background-color: rgba(255, 255, 255, 0.1);
       font-size: 20px;
       font-weight: bold;
     }
     .ant-table-tbody > tr {
-      background-color: rgba(255, 255, 255, 0.3);
+      background-color: rgba(255, 255, 255, 0.1);
       font-weight: 400;
       font-size: 16px;
     }
@@ -58,6 +58,10 @@
     .ant-table-tbody > tr.ant-table-row:hover > td,
     .ant-table-tbody > tr > td.ant-table-cell-row-hover {
       background-color: rgba(160, 200, 160, 0.4) !important;
+    }
+
+    .ant-table-cell {
+      border-bottom: none;
     }
   }
 }
@@ -72,9 +76,31 @@
   }
 }
 
-.header {
+.flipHeader {
   margin: 0 auto;
+  height: 300px;
   text-align: center;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: 1s;
+  .frontCard,
+  .backCard {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    backface-visibility: hidden;
+  }
+  .backCard {
+    transform: rotateY(180deg);
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+  }
+}
+.flipHeader:hover,
+.flipHeader:active {
+  transform: rotateY(180deg);
 }
 
 .footer {
@@ -111,62 +137,8 @@
   color: rgb(80, 98, 90);
 }
 
-.title,
-.description {
+.title {
   text-align: center;
-}
-
-.description {
-  margin: 4rem 0;
-  line-height: 1.5;
-  font-size: 1.5rem;
-}
-
-.code {
-  background: #fafafa;
-  border-radius: 5px;
-  padding: 0.75rem;
-  font-size: 1.1rem;
-  font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
-    Bitstream Vera Sans Mono, Courier New, monospace;
-}
-
-.grid {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  max-width: 800px;
-}
-
-.card {
-  margin: 1rem;
-  padding: 1.5rem;
-  text-align: left;
-  color: inherit;
-  text-decoration: none;
-  border: 1px solid #eaeaea;
-  border-radius: 10px;
-  transition: color 0.15s ease, border-color 0.15s ease;
-  max-width: 300px;
-}
-
-.card:hover,
-.card:focus,
-.card:active {
-  color: #0070f3;
-  border-color: #0070f3;
-}
-
-.card h2 {
-  margin: 0 0 1rem 0;
-  font-size: 1.5rem;
-}
-
-.card p {
-  margin: 0;
-  font-size: 1.25rem;
-  line-height: 1.5;
 }
 
 @media (max-width: 600px) {
@@ -178,14 +150,4 @@
 }
 
 @media (prefers-color-scheme: dark) {
-  .card,
-  .footer {
-    border-color: #222;
-  }
-  .code {
-    background: #111;
-  }
-  .logo img {
-    filter: invert(1);
-  }
 }
