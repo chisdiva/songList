@@ -5,16 +5,21 @@ import { Layout, Table } from "antd";
 
 import SongListTable from "../components/SongListTable";
 import Introduction from "../components/Introduction";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 import musicList from "../public/oakSongList.json";
 
 const { Header, Footer, Content } = Layout;
 export default function Home() {
+  const isNoHover = useRef(null);
   // 解决移动端输入法弹起导致背景被顶起问题
   useEffect(() => {
     const innerHeight = document.documentElement.clientHeight;
     document.getElementById("main").style.height = innerHeight + "px";
+  }, []);
+
+  useEffect(() => {
+    isNoHover.current = window.matchMedia("(any-hover: none)");
   }, []);
   return (
     <div className={styles.container} id="main">
@@ -29,7 +34,7 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <Introduction musicNum={musicList.length} />
+        <Introduction musicNum={musicList.length} isNoHover={isNoHover} />
         <SongListTable musicList={musicList} />
       </main>
 

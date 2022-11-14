@@ -75,32 +75,49 @@
     }
   }
 }
-
 .flipHeader {
+  width: clamp(300px, 400px, 90vw);
   margin: 0 auto;
-  height: 300px;
   text-align: center;
-  position: relative;
-  transform-style: preserve-3d;
-  transition: 1s;
+  height: 300px;
   .frontCard,
   .backCard {
     height: 100%;
     width: 100%;
-    position: absolute;
-    left: 0;
-    top: 0;
-    backface-visibility: hidden;
   }
   .backCard {
-    transform: rotateY(180deg);
-    background-color: rgba(255, 255, 255, 0.2);
-    border-radius: 20px;
+    font-size: 18px;
+    font-weight: 400;
+    text-align: left;
   }
 }
-.flipHeader:hover,
-.flipHeader:active {
-  transform: rotateY(180deg);
+@media (any-hover: hover) {
+  .flipHeader {
+    position: relative;
+    transform-style: preserve-3d;
+    transition: 1s;
+    .frontCard,
+    .backCard {
+      position: absolute;
+      left: 0;
+      top: 0;
+      backface-visibility: hidden;
+    }
+    .backCard {
+      transform: rotateY(180deg);
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+    }
+  }
+  .flipHeader:hover {
+    transform: rotateY(180deg);
+  }
+}
+
+@media (any-hover: none) {
+  .backCard {
+    visibility: hidden;
+  }
 }
 
 .footer {
@@ -133,7 +150,7 @@
 .title {
   margin: 0;
   line-height: 1.15;
-  font-size: 2rem;
+  font-size: 2.5rem;
   color: rgb(80, 98, 90);
 }
 

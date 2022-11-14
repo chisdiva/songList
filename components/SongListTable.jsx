@@ -77,7 +77,7 @@ const SongListTable = (props) => {
       <Input
         size="large"
         style={{ marginBottom: "20px" }}
-        placeholder="搜索"
+        placeholder="搜索（点击对应歌曲可复制）"
         onChange={onInputChange}
       />
       <ConfigProvider renderEmpty={emptyTable}>
