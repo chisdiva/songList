@@ -45,6 +45,7 @@ const Introduction = (props) => {
             <a
               href="https://live.bilibili.com/23945753"
               target="_blank"
+              rel="noreferrer"
               style={{
                 display: "block",
                 position: "absolute",
@@ -55,7 +56,7 @@ const Introduction = (props) => {
               }}
             >
               {/* <span style={{ color: "black" }}>直播间入口</span> */}
-              <img src="/images/bilibili.svg" width={30}></img>
+              <Image src="/images/bilibili.svg" width={30} height={30}></Image>
             </a>
           </div>
         </div>

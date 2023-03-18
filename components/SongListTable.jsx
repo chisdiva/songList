@@ -4,7 +4,16 @@ import Image from "next/image";
 
 import useTableSource from "../hooks/useTableSource";
 
-const languageList = ["中文", "英文"];
+const languageList = [
+  {
+    text: "中文",
+    value: "Chinese",
+  },
+  {
+    text: "英文",
+    value: "English",
+  },
+];
 
 const SongListTable = (props) => {
   // 搜索字符串
@@ -82,14 +91,15 @@ const SongListTable = (props) => {
           placeholder="搜索（点击对应歌曲可复制）"
           onChange={onInputChange}
         />
-        {languageList.map((lang) => (
+        {languageList.map((item) => (
           <Button
-            className={language === lang ? styles.activeFilter : ""}
+            className={language === item.text ? styles.activeFilter : ""}
             shape="round"
             size="large"
-            onClick={() => handleLanguageFilter(lang)}
+            key={item.value}
+            onClick={() => handleLanguageFilter(item.text)}
           >
-            {lang}
+            {item.text}
           </Button>
         ))}
         <Button shape="round" size="large" onClick={handleRandom}>
