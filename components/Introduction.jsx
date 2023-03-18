@@ -1,4 +1,4 @@
-import { Card } from "antd";
+import { Button, Card } from "antd";
 import CountUp from "react-countup";
 import Image from "next/image";
 
@@ -31,7 +31,7 @@ const Introduction = (props) => {
         <div className={styles.flipHeader} onClick={handleFlipClick}>
           <div className={styles.frontCard}>
             <Image
-              src="/images/oakAvatar.webp"
+              src="/images/avatar3.png"
               width={250}
               height={250}
               className={styles.avatar}
@@ -42,6 +42,21 @@ const Introduction = (props) => {
               introText.map((val, index) => {
                 return <p key={index}>{val}</p>;
               })}
+            <a
+              href="https://live.bilibili.com/23945753"
+              target="_blank"
+              style={{
+                display: "block",
+                position: "absolute",
+                bottom: 30,
+                left: "50%",
+                transform: "translateX(-50%)",
+                width: 20,
+              }}
+            >
+              {/* <span style={{ color: "black" }}>直播间入口</span> */}
+              <img src="/images/bilibili.svg" width={30}></img>
+            </a>
           </div>
         </div>
       </div>

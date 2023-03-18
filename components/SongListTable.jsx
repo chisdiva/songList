@@ -1,31 +1,33 @@
-import { Input, message, Table, ConfigProvider } from "antd";
+import { Input, Table, ConfigProvider, Button } from "antd";
 import styles from "../styles/Home.module.scss";
 import Image from "next/image";
 
-import { useCallback } from "react";
 import useTableSource from "../hooks/useTableSource";
-import copy from "copy-to-clipboard";
+
+const languageList = ["中文", "英文"];
 
 const SongListTable = (props) => {
   // 搜索字符串
   // const [searchStr, setSearchStr] = useState('');
   const { musicList } = props;
 
-  const { onInputChange, filterMusicList } = useTableSource({ musicList });
-
-  const handleRowClick = useCallback((record) => {
-    if (record.songName) {
-      copy(`点歌 ${record.songName}`);
-      message.success(`《${record.songName}》已复制到剪贴板，去点歌吧~`);
-    }
-  }, []);
+  const {
+    onInputChange,
+    handleLanguageFilter,
+    handleRowClick,
+    handleRandom,
+    // languageRef,
+    language,
+    filterMusicList,
+  } = useTableSource({
+    musicList,
+  });
 
   const columns = [
     {
       title: "歌名",
       dataIndex: "songName",
       key: "songName",
-      width: "400px",
       render(text, record) {
         const { videoUrl } = record;
         return (
@@ -60,7 +62,6 @@ const SongListTable = (props) => {
       title: "语言",
       dataIndex: "language",
       key: "language",
-      width: "300px",
     },
   ];
 
@@ -74,18 +75,34 @@ const SongListTable = (props) => {
 
   return (
     <div className={styles.songListTable}>
-      <Input
-        size="large"
-        style={{ marginBottom: "20px" }}
-        placeholder="搜索（点击对应歌曲可复制）"
-        onChange={onInputChange}
-      />
+      <div className={styles.filter}>
+        <Input
+          size="large"
+          style={{ marginBottom: "20px" }}
+          placeholder="搜索（点击对应歌曲可复制）"
+          onChange={onInputChange}
+        />
+        {languageList.map((lang) => (
+          <Button
+            className={language === lang ? styles.activeFilter : ""}
+            shape="round"
+            size="large"
+            onClick={() => handleLanguageFilter(lang)}
+          >
+            {lang}
+          </Button>
+        ))}
+        <Button shape="round" size="large" onClick={handleRandom}>
+          随机点一首
+        </Button>
+      </div>
+
       <ConfigProvider renderEmpty={emptyTable}>
         <Table
           columns={columns}
           dataSource={filterMusicList}
           pagination={false}
-          // tableLayout="fixed"
+          tableLayout="fixed"
           scroll={{ x: 450 }}
           onRow={(record) => {
             return { onClick: () => handleRowClick(record) };

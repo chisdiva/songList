@@ -1,5 +1,6 @@
 .avatar {
   border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.2);
 }
 
 .container {
@@ -11,9 +12,6 @@
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-}
-.layout {
-  // color: rgba(255, 255, 255, 0.1);
 }
 
 .main {
@@ -118,6 +116,42 @@
   .backCard {
     visibility: hidden;
   }
+}
+
+.filter {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+  :global {
+    .ant-btn,
+    .ant-btn:focus {
+      background-color: rgba(255, 255, 255, 0.2);
+      border-color: rgba(217, 217, 217);
+      color: rgba(0, 0, 0, 0.85);
+      margin-left: 1vw;
+    }
+    .ant-btn:hover {
+      background-color: rgba(255, 255, 255, 0.8);
+      border-color: rgba(133, 145, 94);
+      color: rgba(133, 145, 94);
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .filter {
+    flex-wrap: wrap;
+    :global {
+      .ant-input {
+        width: 100%;
+      }
+    }
+  }
+}
+
+.activeFilter {
+  background-color: rgba(93, 168, 116, 0.9) !important;
+  color: rgba(255, 255, 255, 0.8) !important;
 }
 
 .footer {
