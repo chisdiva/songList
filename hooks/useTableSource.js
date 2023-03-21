@@ -1,6 +1,7 @@
 import { useState, useCallback, useRef } from "react";
 import { message } from "antd";
 import copy from "copy-to-clipboard";
+import { debounce, throttle } from "../utils";
 
 const useTableSource = (props) => {
   const { musicList } = props;
@@ -16,11 +17,11 @@ const useTableSource = (props) => {
     }
   }, []);
 
-  const handleRandom = () => {
+  const handleRandom = throttle(() => {
     const length = musicList?.length ?? 0;
     const random = Math.floor(Math.random() * length);
     handleRowClick(musicList[random]);
-  };
+  }, 500);
 
   const filterMusicList = musicList.filter((item) => {
     return (
@@ -33,14 +34,19 @@ const useTableSource = (props) => {
     );
   });
 
-  const handleLanguageFilter = (lang) => {
+  const handleLanguageFilter = throttle((lang) => {
     setLanguage(language === lang ? "" : lang);
-  };
+  }, 500);
 
   const onInputChange = (e) => {
     const search = e.target.value;
-    setSearchStr(search);
+    // setSearchStr(search);
+    searchChange(e.target.value);
   };
+
+  const searchChange = debounce((val) => {
+    setSearchStr(val);
+  }, 500);
 
   return {
     onInputChange,

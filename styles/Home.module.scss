@@ -18,6 +18,14 @@
   min-height: 100vh;
   padding: 5vh 15vw;
   // color: rgba(255, 255, 255, 0.1);
+  :global {
+    .ant-back-top-content {
+      background-color: rgba(0, 0, 0, 0.15);
+    }
+    .ant-back-top-content:hover {
+      background-color: rgba(0, 0, 0, 0.75);
+    }
+  }
 }
 
 .songListTable {

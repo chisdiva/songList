@@ -1,7 +1,7 @@
 import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.scss";
-import { Layout, Table } from "antd";
+import { BackTop, Layout, Table } from "antd";
 
 import SongListTable from "../components/SongListTable";
 import Introduction from "../components/Introduction";
@@ -11,18 +11,15 @@ import musicList from "../public/oakSongList.json";
 
 const { Header, Footer, Content } = Layout;
 export default function Home() {
-  const isNoHover = useRef(null);
+  const targetRef = useRef(null);
   // 解决移动端输入法弹起导致背景被顶起问题
   useEffect(() => {
     const innerHeight = document.documentElement.clientHeight;
     document.getElementById("main").style.height = innerHeight + "px";
   }, []);
 
-  useEffect(() => {
-    isNoHover.current = window.matchMedia("(any-hover: none)");
-  }, []);
   return (
-    <div className={styles.container} id="main">
+    <div className={styles.container} id="main" ref={targetRef}>
       <Head>
         <title>鸥诶oak的歌单</title>
         <meta
@@ -34,8 +31,13 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <Introduction musicNum={musicList.length} isNoHover={isNoHover} />
+        <Introduction musicNum={musicList.length} />
         <SongListTable musicList={musicList} />
+        <BackTop
+          target={() => {
+            return targetRef.current;
+          }}
+        />
       </main>
 
       <footer className={styles.footer}></footer>
